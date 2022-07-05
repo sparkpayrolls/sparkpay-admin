@@ -8,9 +8,10 @@ import { AuthModule } from "./modules/auth/auth.module";
 import { PayrollModule } from "./modules/payroll/payroll.module";
 import { UserModule } from "./modules/user/user.module";
 
+let authToken: string;
 export class $api {
   static registerInterceptors(dispatch: ReturnType<typeof useAppDispatch>) {
-    const authToken = Cookies.get(AUTH_TOKEN);
+    authToken = Cookies.get(AUTH_TOKEN) as string;
     $api.$axios.interceptors.request.use((config) => {
       return {
         ...config,
