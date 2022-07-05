@@ -17,9 +17,9 @@ export const useLoginFormContext = () => {
       $api.auth
         .login(values)
         .then(({ token, user }) => {
-          dispatch(commitUser(user));
           Cookies.set(AUTH_TOKEN, token);
           $api.registerInterceptors(dispatch);
+          dispatch(commitUser(user));
         })
         .finally(() => helpers.setSubmitting(false))
         .catch((error) => {
