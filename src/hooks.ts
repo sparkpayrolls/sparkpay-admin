@@ -19,7 +19,7 @@ export const useAppContext = () => {
 
   useEffect(() => {
     const timeout150 = setTimeout(updateProgress, 500, 2);
-    const timeout300 = setTimeout(updateProgress, 1000, 4);
+    const timeout300 = setTimeout(updateProgress, 1000, 3.8);
 
     return () => {
       clearTimeout(timeout150);
@@ -38,7 +38,7 @@ export const useAppContext = () => {
           dispatch(commitUser(null));
         }
       })
-      .finally(() => updateProgress(3.9));
+      .finally(() => updateProgress(4));
   }, [dispatch, updateProgress]);
 
   return { progress, SETUP_STEPS };
