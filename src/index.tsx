@@ -5,7 +5,7 @@ import ReactDOM from "react-dom/client";
 import { Provider } from "react-redux";
 import { persistStore } from "redux-persist";
 import { PersistGate } from "redux-persist/integration/react";
-import App from "./app";
+// import App from "./app";
 import { themeOptions } from "./helpers/theme-options";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
@@ -20,9 +20,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistStore(store)}>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
+        <ThemeProvider theme={theme}>Yellow</ThemeProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>
