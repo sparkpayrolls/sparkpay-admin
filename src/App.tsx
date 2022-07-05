@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Box, CircularProgress } from "@mui/material";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import "./app.css";
+import logo from "./assets/svgs/logo.svg";
+import { useAppContext } from "./hooks";
+import LoginPage from "./pages/login.page/login.page";
+import PayrollTransfersPage from "./pages/payroll-transfers.page/payroll-transfers.page";
 
 function App() {
+  const { progress, SETUP_STEPS } = useAppContext();
+
+  if (SETUP_STEPS > progress) {
+    return (
+      <Box className="fullscreen-loader">
+        <img src={logo} className="fullscreen-loader__logo" alt="app logo" />
+        <CircularProgress
+          className="fullscreen-loader__progress"
+          variant="determinate"
+          value={(progress / SETUP_STEPS) * 100}
+        />
+      </Box>
+    );
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<PayrollTransfersPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
