@@ -1,6 +1,6 @@
 import { Box, CircularProgress } from "@mui/material";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./app.css";
+import "./App.css";
 import logo from "./assets/svgs/logo.svg";
 import { useAppContext } from "./hooks";
 import LoginPage from "./pages/login.page/login.page";
