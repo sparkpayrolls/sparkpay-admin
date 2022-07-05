@@ -1,3 +1,4 @@
+import RefreshIcon from "@mui/icons-material/Refresh";
 import TuneIcon from "@mui/icons-material/Tune";
 import {
   Checkbox,
@@ -80,6 +81,13 @@ function _PayrollTransfersPage() {
             employees
           </AppTable.Title>
           <AppTable.Tools>
+            <AppTable.Button
+              onClick={refresh}
+              endIcon={<RefreshIcon className="table__icon" />}
+            >
+              Refresh
+            </AppTable.Button>
+
             <AppTable.Button
               onClick={showFilterPopover}
               endIcon={<TuneIcon className="table__icon" />}
