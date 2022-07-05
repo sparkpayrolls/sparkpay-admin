@@ -19,7 +19,7 @@ export const DashboardLayout = (props: DashboardLayoutProps) => {
   return (
     <div {...divProps} className={classNames}>
       <IF condition={loading}>
-        <LinearProgress />
+        <LinearProgress className="dashboard-layout__progress" />
       </IF>
       <div className={sideClassNames}>
         <div

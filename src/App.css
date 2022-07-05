@@ -314,6 +314,8 @@ body {
 ***********/
 .table__toolbar-tools {
   margin-left: auto;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .table__container {
@@ -452,6 +454,21 @@ body {
   min-width: 320px;
   min-height: fit-content;
   overflow-y: auto;
+  position: relative;
+}
+
+.dashboard-layout__progress {
+  position: absolute !important;
+  z-index: 2 !important;
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+  .dashboard-layout__progress {
+    width: calc(100vw - 248px);
+  }
 }
 
 .dashboard-layout__side-content-overlay {
