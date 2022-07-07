@@ -29,4 +29,5 @@ export type PayrollEmployee = {
   company: Company;
   employee: Employee;
   country: Pick<Country, "currencySymbol">;
+  transfer: string;
 };

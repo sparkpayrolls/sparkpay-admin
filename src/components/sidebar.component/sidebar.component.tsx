@@ -30,6 +30,14 @@ export const SideBar = () => {
             <CategorySVG />
             <Typography component="span">Payroll employees</Typography>
           </NavLink>
+
+          <NavLink
+            to="/transfers"
+            className={({ isActive: current }) => Util.classNames({ current })}
+          >
+            <CategorySVG />
+            <Typography component="span">Transfers</Typography>
+          </NavLink>
         </section>
       </nav>
 

@@ -43,3 +43,26 @@ export const useAppContext = () => {
 
   return { progress, SETUP_STEPS };
 };
+
+export const useParamStateKey = <
+  T extends Record<string, unknown>,
+  K extends Record<string, unknown>
+>(
+  params: T,
+  state: K
+) => {
+  const [key, setKey] = useState(JSON.stringify(params));
+
+  useEffect(() => {
+    setKey((key) => {
+      const newKey = JSON.stringify(params);
+      if (state[newKey]) {
+        return newKey;
+      }
+
+      return key;
+    });
+  }, [params, state]);
+
+  return key;
+};

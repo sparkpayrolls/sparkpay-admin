@@ -5,6 +5,7 @@ import { logOut } from "../../state/reducers/user/user.reducer";
 import { config } from "../config";
 import { AUTH_TOKEN } from "../constants";
 import { AuthModule } from "./modules/auth/auth.module";
+import { PayoutModule } from "./modules/payout/payout.module";
 import { PayrollModule } from "./modules/payroll/payroll.module";
 import { UserModule } from "./modules/user/user.module";
 
@@ -40,4 +41,5 @@ export class $api {
   static payroll = new PayrollModule($api.$axios);
   static auth = new AuthModule($api.$axios);
   static user = new UserModule($api.$axios);
+  static payout = new PayoutModule($api.$axios);
 }

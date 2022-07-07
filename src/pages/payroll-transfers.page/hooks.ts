@@ -1,13 +1,19 @@
+import moment from "moment";
 import React, { useState, useEffect, useCallback } from "react";
 import { TableMoreCellOption } from "../../components/table.component/types";
 import { $api } from "../../helpers/api/api";
 import { PayrollEmployee } from "../../helpers/api/modules/payroll/types";
 import { useFormContext } from "../../helpers/hooks/use-form-context.hook/use-form-context.hook";
+import { Util } from "../../helpers/util/util";
+import { useParamStateKey } from "../../hooks";
+import { useAppDispatch, useAppSelector } from "../../state/hooks";
+import { getPayrollEmployees } from "../../state/reducers/payroll-employees/payroll-employee.reducer";
 
 export const usePayrollTransfersPageContext = () => {
-  const [apiResponse, setApiResponse] = useState<Awaited<
-    ReturnType<typeof $api.payroll.getPayrollEmployees>
-  > | null>(null);
+  const dispatch = useAppDispatch();
+  const payrollEmployees = useAppSelector((state) => state.payrollEmployees);
+  const [loading, setLoading] = useState(false);
+  const [shouldRefresh, setRefresh] = useState(false);
   const [params, setParams] = useState({
     page: 0,
     limit: 10,
@@ -17,22 +23,18 @@ export const usePayrollTransfersPageContext = () => {
     startDate: null,
     endDate: null,
   });
-  const [loading, setLoading] = useState(false);
-  const [shouldRefresh, setRefresh] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const key = useParamStateKey(params, payrollEmployees);
 
-  const getPayrollEmployees = useCallback(() => {
+  const _getPayrollEmployees = useCallback(() => {
     setLoading(true);
-    $api.payroll
-      .getPayrollEmployees(params)
-      .then(setApiResponse)
+    getPayrollEmployees(dispatch, params)
       .catch(() => setRefresh(true))
       .finally(() => setLoading(false));
-  }, [params]);
+  }, [dispatch, params]);
 
   useEffect(() => {
-    getPayrollEmployees();
-  }, [getPayrollEmployees]);
+    _getPayrollEmployees();
+  }, [_getPayrollEmployees]);
 
   const handlePageChange = (_: unknown, page: number) => {
     setParams({ ...params, page });
@@ -61,66 +63,59 @@ export const usePayrollTransfersPageContext = () => {
 
     return options;
   };
-  const showFilterPopover = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const closeFilterPopover = () => setAnchorEl(null);
-  const { values, getCustomChangeHandler, handleChange, handleSubmit, reset } =
-    useFormContext<Omit<typeof params, "page" | "limit">>({
-      onSubmit(values, helpers) {
-        setParams({ ...params, ...values });
-        setAnchorEl(null);
-        helpers.setSubmitting(false);
-      },
-      initialValues: params,
-    });
+  const filterFormContext = useFormContext<
+    Omit<typeof params, "page" | "limit">
+  >({
+    onSubmit(values, helpers) {
+      setParams({ ...params, ...values });
+      helpers.setSubmitting(false);
+    },
+    initialValues: params,
+  });
   const transformDateValue = (value: moment.Moment | null) => value?.toDate();
+  const { data, meta } = payrollEmployees[key] || {};
 
   return {
-    anchorEl,
-    apiResponse,
+    count: meta?.total || 0,
+    data:
+      data?.map((item) => {
+        return {
+          cells: [
+            { label: `${item.employee?.firstname} ${item.employee?.lastname}` },
+            { label: item.company?.name },
+            {
+              label: `${item.country?.currencySymbol} ${Util.formatMoneyNumber(
+                item.netSalary
+              )}`,
+            },
+            { label: item.payoutStatus },
+            { label: item.transfer },
+            { label: item.remark },
+            { label: moment(item.createdAt).format("MMMM DD, YYYY") },
+          ],
+          moreOptions: getTransferOptions(item),
+        };
+      }) || [],
+    filterFormContext,
+    headRow: [
+      { label: "Name" },
+      { label: "Company" },
+      { label: "Amount" },
+      { label: "Status" },
+      { label: "Transfer ID" },
+      { label: "Remark" },
+      { label: "Date Created" },
+    ],
     loading,
     params,
     shouldRefresh,
-    rowsPerPageOptions: [10, 100, 1000, { value: -1, label: "All" }],
-    statusItems: [
-      {
-        value: "failed",
-        label: "Failed",
-        checked: values.status.includes("failed"),
-      },
-      {
-        value: "successful",
-        label: "Successful",
-        checked: values.status.includes("successful"),
-      },
-      {
-        value: "pending",
-        label: "Pending",
-        checked: values.status.includes("pending"),
-      },
-      {
-        value: "processing",
-        label: "Processing",
-        checked: values.status.includes("processing"),
-      },
-    ],
-    values,
-    closeFilterPopover,
-    getCustomChangeHandler,
-    getTransferOptions,
-    handleChange,
+    title: `${Util.formatMoneyNumber(meta?.total || 0, 0)} Payroll employees`,
     handlePageChange,
-    handleSubmit,
     handleRowsPerPageChange,
     refresh() {
       setRefresh(false);
-      getPayrollEmployees();
+      _getPayrollEmployees();
     },
-    reset,
-    showFilterPopover,
     transformDateValue,
   };
 };
