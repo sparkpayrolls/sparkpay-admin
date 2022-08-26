@@ -13,7 +13,7 @@ export class PayoutModule extends BaseModule {
   }
 
   async retryFailedTransfers(transferIds?: string[]) {
-    await this.$post("/retry-failed-transfers", null, {
+    await this.$get("/retry-failed-transfers", {
       params: { transferIds },
     });
   }
