@@ -1,4 +1,5 @@
 import { DataTable } from "../../components/datatable.component/datatable.component";
+import { AppTable } from "../../components/table.component/table.component";
 import { WithAuth } from "../../hoc/with-auth.hoc/with-auth.hoc";
 import { DashboardLayout } from "../../layouts/dashboard.layout/dashboard.layout";
 import { usePayrollTransfersPageContext } from "./hooks";
@@ -17,6 +18,7 @@ function _PayrollTransfersPage() {
     handlePageChange,
     handleRowsPerPageChange,
     refresh,
+    retryFailedTransfer,
     transformDateValue,
   } = usePayrollTransfersPageContext();
 
@@ -38,6 +40,11 @@ function _PayrollTransfersPage() {
             transformDateValue={transformDateValue}
             formContext={filterFormContext}
           />
+        }
+        toolBarContent={
+          <AppTable.Button onClick={() => retryFailedTransfer([])}>
+            Retry failed
+          </AppTable.Button>
         }
       />
     </DashboardLayout>

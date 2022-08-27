@@ -44,11 +44,15 @@ export const usePayrollTransfersPageContext = () => {
   ) => {
     setParams({ ...params, limit: +event.target.value });
   };
-  const retryFailedTransfer = (employeeId: string) => {
+  const retryFailedTransfer = (employeeId: string | string[]) => {
     setLoading(true);
-    $api.payroll.retryFailedTransfers([employeeId]).finally(() => {
-      setLoading(false);
-    });
+    $api.payroll
+      .retryFailedTransfers(
+        Array.isArray(employeeId) ? employeeId : [employeeId]
+      )
+      .finally(() => {
+        setLoading(false);
+      });
   };
   const getTransferOptions = (transfer: PayrollEmployee) => {
     const options: TableMoreCellOption[] = [];
@@ -116,6 +120,7 @@ export const usePayrollTransfersPageContext = () => {
       setRefresh(false);
       _getPayrollEmployees();
     },
+    retryFailedTransfer,
     transformDateValue,
   };
 };

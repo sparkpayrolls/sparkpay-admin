@@ -40,7 +40,7 @@ function _TransfersPage() {
         }
         toolBarContent={
           <AppTable.Button onClick={() => retryFailedTransfer()}>
-            Retry failed transfers
+            Retry failed
           </AppTable.Button>
         }
       />
