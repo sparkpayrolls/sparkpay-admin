@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { TableMoreCellOption } from "../table.component/types";
 
 export type DataTableTableCell = {
@@ -29,4 +29,5 @@ export type DataTableProps = {
     | React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>
     | undefined;
   shouldRefresh?: boolean;
+  toolBarContent?: React.ReactNode;
 };

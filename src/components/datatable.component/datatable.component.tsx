@@ -28,6 +28,7 @@ export const DataTable = (props: DataTableProps) => {
     rowsPerPageOptions = [10, 100, 1000, { value: -1, label: "All" }],
     shouldRefresh,
     title,
+    toolBarContent,
     onPageChange,
     onRowsPerPageChange,
     refresh,
@@ -74,6 +75,8 @@ export const DataTable = (props: DataTableProps) => {
                   {filterContent}
                 </Popover>
               </IF>
+
+              {toolBarContent}
             </AppTable.Tools>
           </AppTable.Toolbar>
 

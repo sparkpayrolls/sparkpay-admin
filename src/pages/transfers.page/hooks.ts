@@ -39,11 +39,11 @@ export const useTrannsferPageContext = () => {
     _getTransfers();
   }, [_getTransfers]);
 
-  const retryFailedTransfer = (employeeId: string) => {
+  const retryFailedTransfer = async (employeeId?: string) => {
     setLoading(true);
-    $api.payout.retryFailedTransfers([employeeId]).finally(() => {
-      setLoading(false);
-    });
+    if (employeeId) await $api.payout.retryFailedTransfers([employeeId]);
+    else await $api.payout.retryFailedTransfers();
+    setLoading(false);
   };
   const getTransferOptions = (transfer: Transfer) => {
     const options: TableMoreCellOption[] = [];
@@ -117,6 +117,7 @@ export const useTrannsferPageContext = () => {
     rowsPerPage: params.limit || 10,
     onRowsPerPageChange,
     refresh,
+    retryFailedTransfer,
     shouldRefresh,
     title,
   };

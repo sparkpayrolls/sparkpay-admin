@@ -1,4 +1,5 @@
 import { DataTable } from "../../components/datatable.component/datatable.component";
+import { AppTable } from "../../components/table.component/table.component";
 import { WithAuth } from "../../hoc/with-auth.hoc/with-auth.hoc";
 import { DashboardLayout } from "../../layouts/dashboard.layout/dashboard.layout";
 import { useTrannsferPageContext } from "./hooks";
@@ -16,6 +17,7 @@ function _TransfersPage() {
     page,
     rowsPerPage,
     refresh,
+    retryFailedTransfer,
     shouldRefresh,
     title,
   } = useTrannsferPageContext();
@@ -35,6 +37,11 @@ function _TransfersPage() {
         title={title}
         filterContent={
           <TransfersTableFilterContent formContext={filterFormContext} />
+        }
+        toolBarContent={
+          <AppTable.Button onClick={() => retryFailedTransfer()}>
+            Retry failed transfers
+          </AppTable.Button>
         }
       />
     </DashboardLayout>
