@@ -7,7 +7,7 @@ import { AUTH_TOKEN } from "../constants";
 import { AuthModule } from "./modules/auth/auth.module";
 import { PayoutModule } from "./modules/payout/payout.module";
 import { PayrollModule } from "./modules/payroll/payroll.module";
-import { UserModule } from "./modules/user/user.module";
+import { AppUserModule, UserModule } from "./modules/user/user.module";
 
 let authToken: string;
 export class $api {
@@ -42,4 +42,5 @@ export class $api {
   static auth = new AuthModule($api.$axios);
   static user = new UserModule($api.$axios);
   static payout = new PayoutModule($api.$axios);
+  static appUser = new AppUserModule($api.$axios);
 }

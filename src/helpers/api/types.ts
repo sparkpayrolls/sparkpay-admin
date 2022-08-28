@@ -11,3 +11,8 @@ export type ErrorApiResponse = {
   message: string;
   errors?: Record<string, unknown>;
 };
+
+export type QueryParams = {
+  page?: number;
+  limit?: number;
+};

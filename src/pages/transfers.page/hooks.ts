@@ -1,43 +1,44 @@
 import moment from "moment";
-import { useCallback, useEffect, useState } from "react";
 import { TableMoreCellOption } from "../../components/table.component/types";
 import { $api } from "../../helpers/api/api";
 import {
   GetTransfersQuery,
   Transfer,
 } from "../../helpers/api/modules/payout/type";
+import { ApiResponseWithMeta } from "../../helpers/api/types";
 import { useFormContext } from "../../helpers/hooks/use-form-context.hook/use-form-context.hook";
+import { usePageContextData } from "../../helpers/hooks/use-page-context-data.hook/use-page-context-data.hook";
 import { Util } from "../../helpers/util/util";
-import { useParamStateKey } from "../../hooks";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { getTransfers } from "../../state/reducers/transfers/transfers.reducer";
 
 export const useTrannsferPageContext = () => {
-  const dispatch = useAppDispatch();
-  const transfers = useAppSelector((state) => state.transfers);
-  const [loading, setLoading] = useState(false);
-  const [shouldRefresh, setRefresh] = useState(false);
-  const [params, setParams] = useState<GetTransfersQuery>({
-    page: 0,
-    limit: 10,
-    status: [],
-    datePeriod: "",
-    date: null,
-    endDate: null,
-    startDate: null,
+  const {
+    data: transfers,
+    loading,
+    shouldRefresh,
+    key,
+    params,
+    setParams,
+    setLoading,
+    refresh,
+    onPageChange,
+    onRowsPerPageChange,
+  } = usePageContextData<
+    Record<string, ApiResponseWithMeta<Transfer[]>>,
+    GetTransfersQuery
+  >({
+    getData: getTransfers,
+    initialParams: {
+      page: 0,
+      limit: 10,
+      status: [],
+      datePeriod: "",
+      date: null,
+      endDate: null,
+      startDate: null,
+    },
+    stateKey: "transfers",
   });
-  const key = useParamStateKey(params, transfers);
-
-  const _getTransfers = useCallback(() => {
-    setLoading(true);
-    getTransfers(dispatch, params)
-      .catch(() => setRefresh(true))
-      .finally(() => setLoading(false));
-  }, [dispatch, params]);
-
-  useEffect(() => {
-    _getTransfers();
-  }, [_getTransfers]);
 
   const retryFailedTransfer = async (employeeId?: string) => {
     setLoading(true);
@@ -57,18 +58,6 @@ export const useTrannsferPageContext = () => {
     }
 
     return options;
-  };
-  const refresh = () => {
-    setRefresh(false);
-    _getTransfers();
-  };
-  const onPageChange = (_: unknown, page: number) => {
-    setParams({ ...params, page });
-  };
-  const onRowsPerPageChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setParams({ ...params, limit: +event.target.value });
   };
 
   const { data, meta } = transfers[key] || {};

@@ -1,3 +1,4 @@
+import GroupIcon from "@mui/icons-material/Group";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import { Box, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
@@ -37,6 +38,14 @@ export const SideBar = () => {
           >
             <CategorySVG />
             <Typography component="span">Transfers</Typography>
+          </NavLink>
+
+          <NavLink
+            to="/users"
+            className={({ isActive: current }) => Util.classNames({ current })}
+          >
+            <GroupIcon />
+            <Typography component="span">Users</Typography>
           </NavLink>
         </section>
       </nav>

@@ -26,8 +26,8 @@ function _PayrollTransfersPage() {
     <DashboardLayout loading={loading}>
       <DataTable
         count={count}
-        rowsPerPage={params.limit}
-        page={params.page}
+        rowsPerPage={params.limit || 10}
+        page={params.page || 0}
         onPageChange={handlePageChange}
         onRowsPerPageChange={handleRowsPerPageChange}
         data={data}
@@ -38,7 +38,7 @@ function _PayrollTransfersPage() {
         filterContent={
           <PayrollEmployeeTableFilterContent
             transformDateValue={transformDateValue}
-            formContext={filterFormContext}
+            formContext={filterFormContext as any}
           />
         }
         toolBarContent={

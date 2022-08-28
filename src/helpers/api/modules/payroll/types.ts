@@ -1,14 +1,13 @@
-import { Country } from "../../../../types";
+import { Country, Payroll } from "../../../../types";
+import { QueryParams } from "../../types";
 
 export type GetPayrollEmployeeQuery = {
-  page?: number;
-  limit?: number;
   status?: string[];
   datePeriod?: string;
   date?: null | Date;
   startDate?: null | Date;
   endDate?: null | Date;
-};
+} & QueryParams;
 
 type Employee = {
   id: string;
@@ -30,4 +29,5 @@ export type PayrollEmployee = {
   employee: Employee;
   country: Pick<Country, "currencySymbol">;
   transfer: string;
+  payroll: Pick<Payroll, "id" | "payDate" | "status">;
 };

@@ -1,12 +1,12 @@
+import { QueryParams } from "../../types";
+
 export type GetTransfersQuery = {
-  page?: number;
-  limit?: number;
   status?: string[];
   datePeriod?: string;
   date?: null | Date;
   startDate?: null | Date;
   endDate?: null | Date;
-};
+} & QueryParams;
 
 export type Transfer = {
   amount: number;

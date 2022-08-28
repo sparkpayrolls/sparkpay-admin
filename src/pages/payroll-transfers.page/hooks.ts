@@ -1,49 +1,45 @@
 import moment from "moment";
-import React, { useState, useEffect, useCallback } from "react";
 import { TableMoreCellOption } from "../../components/table.component/types";
 import { $api } from "../../helpers/api/api";
-import { PayrollEmployee } from "../../helpers/api/modules/payroll/types";
+import {
+  GetPayrollEmployeeQuery,
+  PayrollEmployee,
+} from "../../helpers/api/modules/payroll/types";
+import { ApiResponseWithMeta } from "../../helpers/api/types";
 import { useFormContext } from "../../helpers/hooks/use-form-context.hook/use-form-context.hook";
+import { usePageContextData } from "../../helpers/hooks/use-page-context-data.hook/use-page-context-data.hook";
 import { Util } from "../../helpers/util/util";
-import { useParamStateKey } from "../../hooks";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { getPayrollEmployees } from "../../state/reducers/payroll-employees/payroll-employee.reducer";
 
 export const usePayrollTransfersPageContext = () => {
-  const dispatch = useAppDispatch();
-  const payrollEmployees = useAppSelector((state) => state.payrollEmployees);
-  const [loading, setLoading] = useState(false);
-  const [shouldRefresh, setRefresh] = useState(false);
-  const [params, setParams] = useState({
-    page: 0,
-    limit: 10,
-    status: [] as string[],
-    datePeriod: "",
-    date: null,
-    startDate: null,
-    endDate: null,
+  const {
+    data: payrollEmployees,
+    loading,
+    shouldRefresh,
+    key,
+    params,
+    setParams,
+    setLoading,
+    refresh,
+    onPageChange: handlePageChange,
+    onRowsPerPageChange: handleRowsPerPageChange,
+  } = usePageContextData<
+    Record<string, ApiResponseWithMeta<PayrollEmployee[]>>,
+    GetPayrollEmployeeQuery
+  >({
+    getData: getPayrollEmployees,
+    initialParams: {
+      page: 0,
+      limit: 10,
+      status: [],
+      datePeriod: "",
+      date: null,
+      endDate: null,
+      startDate: null,
+    },
+    stateKey: "payrollEmployees",
   });
-  const key = useParamStateKey(params, payrollEmployees);
 
-  const _getPayrollEmployees = useCallback(() => {
-    setLoading(true);
-    getPayrollEmployees(dispatch, params)
-      .catch(() => setRefresh(true))
-      .finally(() => setLoading(false));
-  }, [dispatch, params]);
-
-  useEffect(() => {
-    _getPayrollEmployees();
-  }, [_getPayrollEmployees]);
-
-  const handlePageChange = (_: unknown, page: number) => {
-    setParams({ ...params, page });
-  };
-  const handleRowsPerPageChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setParams({ ...params, limit: +event.target.value });
-  };
   const retryFailedTransfer = (employeeId: string | string[]) => {
     setLoading(true);
     $api.payroll
@@ -54,6 +50,7 @@ export const usePayrollTransfersPageContext = () => {
         setLoading(false);
       });
   };
+
   const getTransferOptions = (transfer: PayrollEmployee) => {
     const options: TableMoreCellOption[] = [];
     if (transfer.payoutStatus === "failed") {
@@ -96,6 +93,8 @@ export const usePayrollTransfersPageContext = () => {
             { label: item.transfer },
             { label: item.remark },
             { label: moment(item.createdAt).format("MMMM DD, YYYY") },
+            { label: item.payroll.status },
+            { label: moment(item.payroll.payDate).format("MMMM DD, YYYY") },
           ],
           moreOptions: getTransferOptions(item),
         };
@@ -109,6 +108,8 @@ export const usePayrollTransfersPageContext = () => {
       { label: "Transfer ID" },
       { label: "Remark" },
       { label: "Date Created" },
+      { label: "Payroll Status" },
+      { label: "Pay Date" },
     ],
     loading,
     params,
@@ -116,10 +117,7 @@ export const usePayrollTransfersPageContext = () => {
     title: `${Util.formatMoneyNumber(meta?.total || 0, 0)} Payroll employees`,
     handlePageChange,
     handleRowsPerPageChange,
-    refresh() {
-      setRefresh(false);
-      _getPayrollEmployees();
-    },
+    refresh,
     retryFailedTransfer,
     transformDateValue,
   };

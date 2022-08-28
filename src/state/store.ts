@@ -12,11 +12,13 @@ import {
 import storage from "redux-persist/lib/storage";
 import { config } from "../helpers/config";
 import user from "./reducers/user/user.reducer";
+import users from "./reducers/users/users.reducer";
 import transfers from "./reducers/transfers/transfers.reducer";
 import payrollEmployees from "./reducers/payroll-employees/payroll-employee.reducer";
 
 const reducers = combineReducers({
   user,
+  users,
   transfers,
   payrollEmployees,
 });

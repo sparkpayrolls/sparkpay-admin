@@ -97,11 +97,11 @@ export const DataTable = (props: DataTableProps) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {data.map((items) => {
+                {data.map((items, i) => {
                   const { cells, moreOptions } = items;
 
                   return (
-                    <TableRow key={JSON.stringify(items)} hover>
+                    <TableRow key={`items_${i}`} hover>
                       {cells.map(({ label }, i) => {
                         const align = i >= cells.length - 1 ? "right" : "left";
 

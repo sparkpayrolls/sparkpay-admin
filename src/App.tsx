@@ -6,6 +6,7 @@ import { useAppContext } from "./hooks";
 import LoginPage from "./pages/login.page/login.page";
 import PayrollTransfersPage from "./pages/payroll-transfers.page/payroll-transfers.page";
 import TransfersPage from "./pages/transfers.page/transfers.page";
+import UsersPage from "./pages/users.page/users.page";
 
 function App() {
   const { progress, SETUP_STEPS } = useAppContext();
@@ -28,6 +29,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/transfers" element={<TransfersPage />} />
+        <Route path="/users" element={<UsersPage />} />
         <Route path="*" element={<PayrollTransfersPage />} />
       </Routes>
     </BrowserRouter>
