@@ -1,3 +1,4 @@
+import Avatar from "@mui/material/Avatar";
 import Chip from "@mui/material/Chip";
 import Tooltip from "@mui/material/Tooltip";
 import moment from "moment";
@@ -18,13 +19,29 @@ function _UsersPage() {
     refresh,
     shouldRefresh,
     title,
+    loading,
   } = useUserPageContext();
 
   const _data = data.map((item) => {
+    const name = `${item.firstname} ${item.lastname}`;
+
     return {
       cells: [
         { label: item.id },
-        { label: `${item.firstname} ${item.lastname}` },
+        {
+          label: (
+            <Chip
+              avatar={
+                item.avatar ? (
+                  <Avatar src={item.avatar} alt={name} />
+                ) : (
+                  <Avatar>{name.charAt(0).toUpperCase()}</Avatar>
+                )
+              }
+              label={name}
+            />
+          ),
+        },
         { label: item.email },
         { label: item.country.name },
         {
@@ -53,7 +70,7 @@ function _UsersPage() {
   });
 
   return (
-    <DashboardLayout>
+    <DashboardLayout loading={loading}>
       <DataTable
         count={count}
         data={_data}

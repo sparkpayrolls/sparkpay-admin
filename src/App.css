@@ -571,3 +571,16 @@ body {
 }
 
 /* Pages */
+
+/**************
+** Utilities **
+***************/
+.white-space-nowrap {
+  white-space: nowrap;
+}
+
+.text-clip-200 {
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

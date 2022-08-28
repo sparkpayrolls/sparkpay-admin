@@ -23,6 +23,12 @@ export type User = Document & {
 
 export type Company = Document & {
   name: string;
+  country: string | Country;
+  email: string;
+  phonenumber: string;
+  salaryBreakdown: unknown[];
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type Administrator = Document & {

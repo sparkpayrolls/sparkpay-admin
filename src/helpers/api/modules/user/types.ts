@@ -7,7 +7,7 @@ export type GetUsersQueryParams = QueryParams & {
 
 export type GetUsersResponse = Pick<
   User,
-  "firstname" | "lastname" | "email" | "createdAt" | "id"
+  "firstname" | "lastname" | "email" | "createdAt" | "id" | "avatar"
 > & {
   country: Pick<Country, "name" | "id">;
   companies: (Pick<Administrator, "isRoot" | "id"> & {

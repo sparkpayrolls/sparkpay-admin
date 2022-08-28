@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import logo from "./assets/svgs/logo.svg";
 import { useAppContext } from "./hooks";
+import CompaniesPage from "./pages/companies.page/companies.page";
 import LoginPage from "./pages/login.page/login.page";
 import PayrollTransfersPage from "./pages/payroll-transfers.page/payroll-transfers.page";
 import TransfersPage from "./pages/transfers.page/transfers.page";
@@ -30,6 +31,7 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/transfers" element={<TransfersPage />} />
         <Route path="/users" element={<UsersPage />} />
+        <Route path="/companies" element={<CompaniesPage />} />
         <Route path="*" element={<PayrollTransfersPage />} />
       </Routes>
     </BrowserRouter>
