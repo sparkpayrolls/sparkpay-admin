@@ -12,19 +12,26 @@ import {
 import storage from "redux-persist/lib/storage";
 import { config } from "../helpers/config";
 import companies from "./reducers/companies/companies.reducer";
+import dashboard from "./reducers/dashboard/dashboard.reducer";
 import user from "./reducers/user/user.reducer";
 import users from "./reducers/users/users.reducer";
+import snackbar from "./reducers/snackbar/snackbar.reducer";
 import transfers from "./reducers/transfers/transfers.reducer";
 import payrollEmployees from "./reducers/payroll-employees/payroll-employee.reducer";
 
 const reducers = combineReducers({
   companies,
+  dashboard,
   user,
   users,
+  snackbar,
   transfers,
   payrollEmployees,
 });
-const persistedReducers = persistReducer({ key: "root", storage }, reducers);
+const persistedReducers = persistReducer(
+  { key: "root", storage, blacklist: ["snackbar"] },
+  reducers
+);
 
 export const store = configureStore({
   reducer: persistedReducers,

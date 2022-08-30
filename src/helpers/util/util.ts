@@ -34,4 +34,25 @@ export class Util {
   static sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
+
+  static shortenNumber(num: number, precision = 0) {
+    if (num < 1000) {
+      return Util.formatMoneyNumber(num, precision);
+    }
+
+    if (num < 1000000) {
+      return Util.formatMoneyNumber(num / 1000, precision) + "K";
+    }
+    if (num < 1000000000) {
+      return Util.formatMoneyNumber(num / 1000000, precision) + "M";
+    }
+    if (num < 1000000000000) {
+      return Util.formatMoneyNumber(num / 1000000000, precision) + "B";
+    }
+    if (num < 1000000000000000) {
+      return Util.formatMoneyNumber(num / 1000000000000, precision) + "T";
+    }
+
+    return Util.formatMoneyNumber(num, precision);
+  }
 }

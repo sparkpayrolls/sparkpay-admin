@@ -1,4 +1,5 @@
 import BusinessIcon from "@mui/icons-material/Business";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 import GroupIcon from "@mui/icons-material/Group";
 import PaidIcon from "@mui/icons-material/Paid";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
@@ -28,6 +29,14 @@ export const SideBar = () => {
           {/* <h6 className="sidebar__nav-title h100">Section Title</h6> */}
           <NavLink
             to="/"
+            className={({ isActive: current }) => Util.classNames({ current })}
+          >
+            <DashboardIcon />
+            <Typography component="span">Overview</Typography>
+          </NavLink>
+
+          <NavLink
+            to="/payroll-employees"
             className={({ isActive: current }) => Util.classNames({ current })}
           >
             <ReceiptLongIcon />

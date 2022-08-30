@@ -411,6 +411,39 @@ body {
   height: 60px !important;
 }
 
+.analytics-card {
+  padding: 0.875rem;
+  border-radius: 0.5rem;
+  width: 100%;
+  background: #f8fafc;
+}
+
+.analytics-card--dark {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+@media screen and (min-width: 768px) {
+  .analytics-card {
+    width: auto;
+  }
+}
+
+.analytics-card__icon {
+  background: #153ca8;
+  padding: 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+  line-height: 1;
+  font-size: 0.5rem;
+  color: #ffffff;
+}
+
+.analytics-card__icon svg {
+  width: 15px;
+  height: 15px;
+}
+
 /* Layouts */
 
 /***************
@@ -583,4 +616,8 @@ body {
   max-width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.d-flex {
+  display: flex;
 }

@@ -6,6 +6,7 @@ import { config } from "../config";
 import { AUTH_TOKEN } from "../constants";
 import { AuthModule } from "./modules/auth/auth.module";
 import { CompanyModule } from "./modules/company/company.module";
+import { DashboardModule } from "./modules/dashboard/dashboard.module";
 import { PayoutModule } from "./modules/payout/payout.module";
 import { PayrollModule } from "./modules/payroll/payroll.module";
 import { AppUserModule, UserModule } from "./modules/user/user.module";
@@ -45,4 +46,5 @@ export class $api {
   static payout = new PayoutModule($api.$axios);
   static appUser = new AppUserModule($api.$axios);
   static company = new CompanyModule($api.$axios);
+  static dashboard = new DashboardModule($api.$axios);
 }

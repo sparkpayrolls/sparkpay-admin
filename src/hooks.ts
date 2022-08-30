@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { $api } from "./helpers/api/api";
 import { useAppDispatch } from "./state/hooks";
+import { snackbar } from "./state/reducers/snackbar/snackbar.reducer";
 import { commitUser } from "./state/reducers/user/user.reducer";
 
 export const useAppContext = () => {
@@ -11,6 +12,10 @@ export const useAppContext = () => {
   const updateProgress = useCallback((progress: number) => {
     setProgress((_progress) => Math.max(progress, _progress));
   }, []);
+
+  useEffect(() => {
+    snackbar.register(dispatch);
+  }, [dispatch]);
 
   useEffect(() => {
     $api.registerInterceptors(dispatch);
