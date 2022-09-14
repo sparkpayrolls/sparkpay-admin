@@ -2,7 +2,7 @@ import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { $api } from "../../helpers/api/api";
-import { AUTH_TOKEN } from "../../helpers/constants";
+import { AUTH_DETAILS, AUTH_TOKEN } from "../../helpers/constants";
 import { useFormContext } from "../../helpers/hooks/use-form-context.hook/use-form-context.hook";
 import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { commitUser } from "../../state/reducers/user/user.reducer";
@@ -16,8 +16,9 @@ export const useLoginFormContext = () => {
     async onSubmit(values, helpers) {
       $api.auth
         .login(values)
-        .then(({ token, user }) => {
-          Cookies.set(AUTH_TOKEN, token);
+        .then(({ user, ...authDetails }) => {
+          Cookies.set(AUTH_TOKEN, authDetails.accessToken);
+          Cookies.set(AUTH_DETAILS, JSON.stringify(authDetails));
           $api.registerInterceptors(dispatch);
           dispatch(commitUser(user));
         })

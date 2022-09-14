@@ -1,10 +1,12 @@
 import axios from "axios";
 import Cookies from "js-cookie";
+import moment from "moment";
 import { useAppDispatch } from "../../state/hooks";
 import { logOut } from "../../state/reducers/user/user.reducer";
 import { config } from "../config";
-import { AUTH_TOKEN } from "../constants";
+import { AUTH_DETAILS, AUTH_TOKEN } from "../constants";
 import { AuthModule } from "./modules/auth/auth.module";
+import { AuthDetails } from "./modules/auth/types";
 import { CompanyModule } from "./modules/company/company.module";
 import { DashboardModule } from "./modules/dashboard/dashboard.module";
 import { PayoutModule } from "./modules/payout/payout.module";
@@ -12,19 +14,47 @@ import { PayrollModule } from "./modules/payroll/payroll.module";
 import { AppUserModule, UserModule } from "./modules/user/user.module";
 
 let authToken: string;
+let authDetails: AuthDetails;
+let tokenInterceptor: number;
+let authInterceptor: number;
 export class $api {
   static registerInterceptors(dispatch: ReturnType<typeof useAppDispatch>) {
     authToken = Cookies.get(AUTH_TOKEN) as string;
-    $api.$axios.interceptors.request.use((config) => {
+    authDetails = JSON.parse(Cookies.get(AUTH_DETAILS) || '""');
+
+    $api.$axios.interceptors.request.eject(tokenInterceptor);
+    $api.$axios.interceptors.response.eject(authInterceptor);
+
+    tokenInterceptor = $api.$axios.interceptors.request.use(async (_config) => {
+      if (
+        moment(authDetails.accessTokenExpires).isBefore(moment()) &&
+        moment(authDetails.refreshTokenExpires).isAfter(moment())
+      ) {
+        const res = await axios({
+          baseURL: config().apiUrl,
+          url: "/auth/tokens",
+          params: { refreshToken: authDetails.refreshToken },
+        }).catch(() => {
+          /** invalid token */
+        });
+        if (res && res.data && res.data.data) {
+          authDetails = res.data.data;
+          authToken = authDetails.accessToken;
+          Cookies.set(AUTH_TOKEN, authToken);
+          Cookies.set(AUTH_DETAILS, JSON.stringify(authDetails));
+        }
+      }
+
       return {
-        ...config,
+        ..._config,
         headers: {
-          ...(config?.headers || {}),
+          ...(_config?.headers || {}),
           Authorization: `Bearer ${authToken}`,
         },
       };
     });
-    $api.$axios.interceptors.response.use(
+
+    authInterceptor = $api.$axios.interceptors.response.use(
       (res) => res,
       (error) => {
         switch (error.response?.status) {
