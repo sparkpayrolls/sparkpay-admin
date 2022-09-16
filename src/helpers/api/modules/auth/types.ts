@@ -7,5 +7,13 @@ export type LoginPayload = {
 
 export type LoggedInUser = {
   user: User;
-  token: string;
+  accessToken: string;
+  refreshToken: string;
+  accessTokenExpires: string;
+  refreshTokenExpires: string;
 };
+
+export type AuthDetails = Pick<
+  LoggedInUser,
+  "accessToken" | "refreshToken" | "accessTokenExpires" | "refreshTokenExpires"
+>;

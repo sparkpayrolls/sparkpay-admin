@@ -1,4 +1,5 @@
 export const AUTH_TOKEN = "AUTH_TOKEN";
+export const AUTH_DETAILS = "AUTH_DETAILS";
 export const STATE = {
   USER: "USER",
   TRANSFERS: "TRANSFERS",
