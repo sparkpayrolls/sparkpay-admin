@@ -29,12 +29,11 @@ export const DataTable = (props: DataTableProps) => {
     shouldRefresh,
     title,
     toolBarContent,
-    onPageChange,
     onRowsPerPageChange,
     refresh,
   } = props;
-  const { anchorEl, closeFilterPopover, showFilterPopover } =
-    useDataTableContext();
+  const { anchorEl, closeFilterPopover, onPageChange, showFilterPopover } =
+    useDataTableContext(props);
 
   return (
     <Box>
