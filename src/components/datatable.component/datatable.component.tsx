@@ -23,7 +23,6 @@ export const DataTable = (props: DataTableProps) => {
     data = [],
     filterContent,
     headRow,
-    page,
     rowsPerPage,
     rowsPerPageOptions = [10, 100, 1000, { value: -1, label: "All" }],
     shouldRefresh,
@@ -32,8 +31,13 @@ export const DataTable = (props: DataTableProps) => {
     onRowsPerPageChange,
     refresh,
   } = props;
-  const { anchorEl, closeFilterPopover, onPageChange, showFilterPopover } =
-    useDataTableContext(props);
+  const {
+    anchorEl,
+    page,
+    closeFilterPopover,
+    onPageChange,
+    showFilterPopover,
+  } = useDataTableContext(props);
 
   return (
     <Box>

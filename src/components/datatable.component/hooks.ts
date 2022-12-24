@@ -4,7 +4,7 @@ import { DataTableProps } from "./types";
 export const useDataTableContext = (props: DataTableProps) => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
-  const { onPageChange: _onPageChange } = props;
+  const { page, onPageChange: _onPageChange } = props;
   const showFilterPopover = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -16,5 +16,11 @@ export const useDataTableContext = (props: DataTableProps) => {
     return _onPageChange(ev, page + 1);
   };
 
-  return { anchorEl, closeFilterPopover, onPageChange, showFilterPopover };
+  return {
+    anchorEl,
+    page: Math.max(page - 1, 0),
+    closeFilterPopover,
+    onPageChange,
+    showFilterPopover,
+  };
 };
