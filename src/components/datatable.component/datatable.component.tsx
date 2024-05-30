@@ -87,8 +87,11 @@ export const DataTable = (props: DataTableProps) => {
             <AppTable.Table>
               <TableHead>
                 <TableRow>
-                  {headRow.map(({ label }, i) => {
+                  {headRow.map((cell, i) => {
                     const align = i >= headRow.length - 1 ? "right" : "left";
+                    const label = cell?.hasOwnProperty("label")
+                      ? (cell as any)["label"]
+                      : cell;
 
                     return (
                       <TableCell align={align} key={`${label}_${i}`}>
@@ -105,8 +108,11 @@ export const DataTable = (props: DataTableProps) => {
 
                   return (
                     <TableRow key={`items_${i}`} hover>
-                      {cells.map(({ label }, i) => {
+                      {cells.map((cell, i) => {
                         const align = i >= cells.length - 1 ? "right" : "left";
+                        const label = cell?.hasOwnProperty("label")
+                          ? (cell as any)["label"]
+                          : cell;
 
                         return (
                           <TableCell

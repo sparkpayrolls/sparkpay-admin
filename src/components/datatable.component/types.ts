@@ -1,9 +1,11 @@
 import React, { ReactNode } from "react";
 import { TableMoreCellOption } from "../table.component/types";
 
-export type DataTableTableCell = {
-  label: string | ReactNode;
-};
+export type DataTableTableCell =
+  | ReactNode
+  | {
+      label: string | ReactNode;
+    };
 
 export type DataTableProps = {
   title?: string;

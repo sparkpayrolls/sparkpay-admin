@@ -13,14 +13,22 @@ import { LocalizationProvider, DesktopDatePicker } from "@mui/x-date-pickers";
 import { AdapterMoment } from "@mui/x-date-pickers/AdapterMoment";
 import { IF } from "../../components/if.component/if.component";
 import { PayrollEmployeeTableFilterContentProps } from "./types";
+import moment from "moment";
 
 export const PayrollEmployeeTableFilterContent = (
   props: PayrollEmployeeTableFilterContentProps
 ) => {
   const { getCustomChangeHandler, handleChange, handleSubmit, reset, values } =
     props.formContext;
-  const { transformDateValue } = props;
-  const statusItems = [
+  const {
+    transformDateValue = (value: moment.Moment | null) => value?.toDate(),
+    statuses,
+  } = props;
+  const statusItems = statuses?.map((status) => ({
+    value: status,
+    label: status,
+    checked: values.status.includes(status),
+  })) || [
     {
       value: "failed",
       label: "Failed",

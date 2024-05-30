@@ -29,6 +29,7 @@ export type Company = Document & {
   salaryBreakdown: unknown[];
   createdAt: string;
   updatedAt: string;
+  wallet: CompanyWallet;
 };
 
 export type Administrator = Document & {
@@ -38,6 +39,15 @@ export type Administrator = Document & {
 };
 
 export type Payroll = Document & {
+  id: string;
   status: string;
   payDate: string;
+  company: string | Company;
+  totalAmount: number;
+  fee: number;
+  size: number;
+};
+
+export type CompanyWallet = Document & {
+  balance: number;
 };

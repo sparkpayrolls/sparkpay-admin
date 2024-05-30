@@ -20,15 +20,23 @@ export class Util {
   }
 
   static formatMoneyNumber(number: number, precision = 2) {
-    let [result, decimal] = number.toFixed(precision).split(".");
+    let [result, decimal] = number?.toFixed(precision)?.split(".") || [];
 
-    result = (+result).toLocaleString();
+    result = (+result)?.toLocaleString();
 
     if (decimal) {
       result += `.${decimal}`;
     }
 
     return result;
+  }
+
+  static currencyFormatMoneyNumber(
+    currency: string,
+    number: number,
+    precision = 2
+  ) {
+    return `${currency} ${Util.formatMoneyNumber(number, precision)}`;
   }
 
   static sleep(ms: number) {

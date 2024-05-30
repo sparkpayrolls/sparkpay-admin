@@ -3,7 +3,10 @@ import { useParamStateKey } from "../../../hooks";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import { UsePageContextDataParams } from "./types";
 
-export const usePageContextData = <K, P extends Record<string, unknown>>(
+export const usePageContextData = <
+  K,
+  P extends Record<string, unknown> = Record<string, unknown>
+>(
   params: UsePageContextDataParams<P>
 ) => {
   const { stateKey, initialParams, getData } = params;

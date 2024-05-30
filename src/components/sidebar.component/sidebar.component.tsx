@@ -36,6 +36,14 @@ export const SideBar = () => {
           </NavLink>
 
           <NavLink
+            to="/payrolls"
+            className={({ isActive: current }) => Util.classNames({ current })}
+          >
+            <ReceiptLongIcon />
+            <Typography component="span">Payrolls</Typography>
+          </NavLink>
+
+          <NavLink
             to="/payroll-employees"
             className={({ isActive: current }) => Util.classNames({ current })}
           >
