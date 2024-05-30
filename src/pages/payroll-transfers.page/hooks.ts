@@ -93,7 +93,7 @@ export const usePayrollTransfersPageContext = () => {
             { label: item.transfer },
             { label: item.remark },
             { label: moment(item.createdAt).format("MMMM DD, YYYY") },
-            { label: moment(item.payroll.payDate).format("MMMM DD, YYYY") },
+            { label: moment(item.payroll?.payDate).format("MMMM DD, YYYY") },
           ],
           moreOptions: getTransferOptions(item),
         };
