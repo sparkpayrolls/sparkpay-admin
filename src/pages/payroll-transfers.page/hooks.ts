@@ -30,7 +30,7 @@ export const usePayrollTransfersPageContext = () => {
     getData: getPayrollEmployees,
     initialParams: {
       page: 0,
-      limit: 10,
+      limit: 100,
       status: [],
       datePeriod: "",
       date: null,

@@ -23,7 +23,7 @@ export const useUserPageContext = () => {
     GetUsersQueryParams
   >({
     getData: getUsers,
-    initialParams: { page: 0, limit: 10 },
+    initialParams: { page: 0, limit: 100 },
     stateKey: "users",
   });
 

@@ -24,7 +24,7 @@ function _CompaniesPage() {
   } = useCompaniesPageContext();
 
   const _data = data.map((item) => {
-    const name = `${item.owner.user.firstname} ${item.owner.user.lastname}`;
+    const name = `${item?.owner?.user?.firstname} ${item?.owner?.user?.lastname}`;
 
     return {
       cells: [
@@ -55,7 +55,7 @@ function _CompaniesPage() {
           label: (
             <Chip
               avatar={
-                item.owner.user.avatar ? (
+                item.owner.user?.avatar ? (
                   <Avatar src={item.owner.user.avatar} alt={name} />
                 ) : (
                   <Avatar>{name.charAt(0).toUpperCase()}</Avatar>
@@ -68,10 +68,10 @@ function _CompaniesPage() {
         {
           label: (
             <Typography
-              title={item.owner.user.email}
+              title={item.owner.user?.email}
               className="white-space-nowrap text-clip-200"
             >
-              {item.owner.user.email}
+              {item.owner.user?.email}
             </Typography>
           ),
         },

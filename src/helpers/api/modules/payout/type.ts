@@ -10,10 +10,14 @@ export type GetTransfersQuery = {
 
 export type Transfer = {
   amount: number;
+  accountName?: string;
+  accountNumber?: string;
   createdAt: string;
   id: string;
   payoutMethod: { country: { currencySymbol: string } };
   reference: string;
   status: string;
   remark: string;
+  providerResponse?: any;
+  meta?: any;
 };

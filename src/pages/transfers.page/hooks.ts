@@ -10,6 +10,7 @@ import { useFormContext } from "../../helpers/hooks/use-form-context.hook/use-fo
 import { usePageContextData } from "../../helpers/hooks/use-page-context-data.hook/use-page-context-data.hook";
 import { Util } from "../../helpers/util/util";
 import { getTransfers } from "../../state/reducers/transfers/transfers.reducer";
+import get from "lodash.get";
 
 export const useTrannsferPageContext = () => {
   const {
@@ -30,7 +31,7 @@ export const useTrannsferPageContext = () => {
     getData: getTransfers,
     initialParams: {
       page: 0,
-      limit: 10,
+      limit: 100,
       status: [],
       datePeriod: "",
       date: null,
@@ -64,13 +65,41 @@ export const useTrannsferPageContext = () => {
   const count = meta?.total || 0;
   const title = `${Util.formatMoneyNumber(count, 0)} Transfers`;
   const _data = data?.map((item) => {
-    const currencySymbol = item.payoutMethod?.country?.currencySymbol;
     const amount = Util.formatMoneyNumber(item.amount, 2);
 
     return {
       cells: [
         { label: item.id },
-        { label: `${currencySymbol} ${amount}` },
+        {
+          label:
+            item.accountName ||
+            get(item.meta, "webhook.data.recipient.details.account_name") ||
+            get(
+              item.providerResponse,
+              "successEventPayload.data.recipient.details.account_name",
+              "--- ---"
+            ),
+        },
+        {
+          label:
+            get(item.meta, "webhook.data.recipient.details.account_name") ||
+            get(
+              item.providerResponse,
+              "successEventPayload.data.recipient.details.account_name"
+            ) ||
+            item.accountName ||
+            "--- ---",
+        },
+        {
+          label:
+            item.accountNumber ||
+            get(
+              item.providerResponse,
+              "successEventPayload.data.recipient.details.account_number",
+              "--- ---"
+            ),
+        },
+        { label: `${amount}` },
         { label: item.reference },
         { label: item.status },
         { label: item.remark },
@@ -81,6 +110,9 @@ export const useTrannsferPageContext = () => {
   });
   const headerRow = [
     { label: "Transfer ID" },
+    { label: "Employee Name" },
+    { label: "Account Name" },
+    { label: "Account Number" },
     { label: "Amount" },
     { label: "Reference" },
     { label: "Status" },
