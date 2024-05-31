@@ -21,6 +21,7 @@ function _CompaniesPage() {
     shouldRefresh,
     title,
     loading,
+    deleteCompany,
   } = useCompaniesPageContext();
 
   const _data = data.map((item) => {
@@ -81,6 +82,14 @@ function _CompaniesPage() {
               {moment(item.createdAt).format("MMMM DD, YYYY")}
             </Typography>
           ),
+        },
+      ],
+      moreOptions: [
+        {
+          label: "Delete Company",
+          onClick() {
+            deleteCompany(item.id);
+          },
         },
       ],
     };

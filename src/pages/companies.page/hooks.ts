@@ -1,3 +1,4 @@
+import { $api } from "../../helpers/api/api";
 import {
   GetCompaniesQueryParams,
   GetCompaniesResponse,
@@ -17,6 +18,7 @@ export const useCompaniesPageContext = () => {
     page,
     onPageChange,
     onRowsPerPageChange,
+    setLoading,
     refresh,
   } = usePageContextData<
     Record<string, ApiResponseWithMeta<GetCompaniesResponse[]>>,
@@ -27,18 +29,28 @@ export const useCompaniesPageContext = () => {
     stateKey: "companies",
   });
 
+  const deleteCompany = (company: string | string[]) => {
+    setLoading(true);
+    $api.company
+      .deleteCompanies(Array.isArray(company) ? company : [company])
+      .then(() => refresh())
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   const { data, meta } = users[key] || {};
   const count = meta?.total || 0;
   const title = `${Util.formatMoneyNumber(count, 0)} Companies`;
   const headerRow = [
-    { label: "Name" },
-    { label: "Country" },
-    { label: "Email" },
-    { label: "Employee\xa0Count" },
-    { label: "Payroll\xa0Count" },
-    { label: "Owner" },
-    { label: "Owner\xa0Email" },
-    { label: "Date\xa0Created" },
+    "Name",
+    "Country",
+    "Email",
+    "Employee\xa0Count",
+    "Payroll\xa0Count",
+    "Owner",
+    "Owner\xa0Email",
+    "Date\xa0Created",
   ];
 
   return {
@@ -50,6 +62,7 @@ export const useCompaniesPageContext = () => {
     shouldRefresh,
     rowsPerPage,
     page,
+    deleteCompany,
     onPageChange,
     onRowsPerPageChange,
     refresh,

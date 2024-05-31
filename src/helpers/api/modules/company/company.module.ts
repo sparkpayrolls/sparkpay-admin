@@ -8,6 +8,14 @@ export class CompanyModule extends BaseModule {
     super($axios, "/app-admin/companies");
   }
 
+  deleteCompanies(companyId: string | string[]) {
+    return this.$delete("/", null, {
+      params: {
+        companyId,
+      },
+    });
+  }
+
   getCompanies(params: GetCompaniesQueryParams) {
     return this.$get<ApiResponseWithMeta<GetCompaniesResponse[]>>("/", {
       params,
