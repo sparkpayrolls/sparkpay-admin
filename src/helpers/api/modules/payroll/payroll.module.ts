@@ -38,4 +38,10 @@ export class PayrollModule extends BaseModule {
       params: { payrollIds },
     });
   }
+
+  async resumePayroll(payrollIds?: string[]) {
+    await this.$put("/resume", null, {
+      params: { payrollIds },
+    });
+  }
 }

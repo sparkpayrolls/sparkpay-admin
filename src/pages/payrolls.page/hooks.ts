@@ -67,6 +67,16 @@ export const usePayrollsPageContext = () => {
       });
   };
 
+  const resumePayroll = (payroll: string | string[]) => {
+    setLoading(true);
+    $api.payroll
+      .resumePayroll(Array.isArray(payroll) ? payroll : [payroll])
+      .then(() => refresh())
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
   const getPayrollOptions = (payroll: Payroll) => {
     const options: TableMoreCellOption[] = [];
 
@@ -81,6 +91,16 @@ export const usePayrollsPageContext = () => {
         },
       });
     }
+
+    if (["paused"].includes(payroll.status)) {
+      options.push({
+        label: "Resume Payroll",
+        onClick() {
+          resumePayroll(payroll.id);
+        },
+      });
+    }
+
     if (["paused", "pending"].includes(payroll.status)) {
       options.push({
         label: "Delete Payroll",
