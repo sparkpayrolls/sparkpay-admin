@@ -43,8 +43,8 @@ export const useTrannsferPageContext = () => {
 
   const retryFailedTransfer = async (employeeId?: string) => {
     setLoading(true);
-    if (employeeId) await $api.payout.retryFailedTransfers([employeeId]);
-    else await $api.payout.retryFailedTransfers();
+    if (employeeId) await $api.payment.retryFailedTransfers([employeeId]);
+    // else await $api.payment.retryFailedTransfers();
     setLoading(false);
   };
   const getTransferOptions = (transfer: Transfer) => {

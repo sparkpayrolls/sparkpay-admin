@@ -11,10 +11,4 @@ export class PayoutModule extends BaseModule {
   getTransfers(params: GetTransfersQuery) {
     return this.$get<ApiResponseWithMeta<Transfer[]>>("", { params });
   }
-
-  async retryFailedTransfers(transferIds?: string[]) {
-    await this.$get("/retry-failed-transfers", {
-      params: { transferIds },
-    });
-  }
 }
