@@ -51,6 +51,7 @@ function _CompaniesPage() {
           ),
         },
         { label: Util.formatMoneyNumber(item.employeeCount, 0) },
+        { label: Util.formatMoneyNumber(item.payrollBurden, 0) },
         { label: Util.formatMoneyNumber(item.processedPayrollCount, 0) },
         {
           label: (

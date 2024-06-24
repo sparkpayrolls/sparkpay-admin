@@ -17,6 +17,7 @@ export type GetCompaniesResponse = Pick<
 > & {
   employeeCount: number;
   processedPayrollCount: number;
+  payrollBurden: number;
   owner: {
     id: string;
     company: string;

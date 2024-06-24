@@ -47,6 +47,7 @@ export const useCompaniesPageContext = () => {
     "Country",
     "Email",
     "Employee\xa0Count",
+    "Payroll\xa0Burden",
     "Payroll\xa0Count",
     "Owner",
     "Owner\xa0Email",
