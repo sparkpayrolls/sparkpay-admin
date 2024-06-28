@@ -87,6 +87,14 @@ export const useTrannsferPageContext = () => {
               item.providerResponse,
               "successEventPayload.data.recipient.details.account_name"
             ) ||
+            get(
+              item.meta,
+              "providerResponse.providerResponse.beneficiary.account_name"
+            ) ||
+            get(
+              item.meta,
+              "webhook.providerPayload.data.recipient.details.account_name"
+            ) ||
             item.accountName ||
             "--- ---",
         },
