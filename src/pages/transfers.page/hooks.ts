@@ -107,6 +107,7 @@ export const useTrannsferPageContext = () => {
               "--- ---"
             ),
         },
+        item.bank?.name,
         { label: `${amount}` },
         { label: item.reference },
         { label: item.status },
@@ -121,6 +122,7 @@ export const useTrannsferPageContext = () => {
     { label: "Employee Name" },
     { label: "Account Name" },
     { label: "Account Number" },
+    { label: "Bank" },
     { label: "Amount" },
     { label: "Reference" },
     { label: "Status" },

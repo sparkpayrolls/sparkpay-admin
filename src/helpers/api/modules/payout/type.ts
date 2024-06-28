@@ -12,6 +12,9 @@ export type Transfer = {
   amount: number;
   accountName?: string;
   accountNumber?: string;
+  bank?: {
+    name: string;
+  };
   createdAt: string;
   id: string;
   payoutMethod: { country: { currencySymbol: string } };
