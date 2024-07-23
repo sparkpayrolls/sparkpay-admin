@@ -14,6 +14,7 @@ export type GetCompaniesResponse = Pick<
   | "createdAt"
   | "updatedAt"
   | "id"
+  | "wallet"
 > & {
   employeeCount: number;
   processedPayrollCount: number;
