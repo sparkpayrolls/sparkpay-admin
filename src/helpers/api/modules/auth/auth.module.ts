@@ -1,7 +1,8 @@
 import { AxiosInstance } from "axios";
-import { ApiResponse } from "../../types";
+import { ApiResponse, ApiResponseWithMeta } from "../../types";
 import { BaseModule } from "../base/base.module";
-import { LoggedInUser, LoginPayload } from "./types";
+import { CreateSignupInviteToken, LoggedInUser, LoginPayload } from "./types";
+import { AuthToken } from "../../../../types";
 
 export class AuthModule extends BaseModule {
   constructor($axios: AxiosInstance) {
@@ -15,5 +16,21 @@ export class AuthModule extends BaseModule {
     );
 
     return data;
+  }
+}
+
+export class AdminAuthModule extends BaseModule {
+  constructor($axios: AxiosInstance) {
+    super($axios, "/admin/auth");
+  }
+
+  async getSignupInviteTokens(params: unknown) {
+    return this.$get<ApiResponseWithMeta<AuthToken[]>>("/signup-invites", {
+      params,
+    });
+  }
+
+  async createSignupInviteToken(payload: CreateSignupInviteToken) {
+    return this.$post<ApiResponse<AuthToken>>("/signup-invites", payload);
   }
 }

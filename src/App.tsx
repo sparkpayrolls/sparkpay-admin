@@ -13,6 +13,8 @@ import TransfersPage from "./pages/transfers.page/transfers.page";
 import UsersPage from "./pages/users.page/users.page";
 import { useAppSelector } from "./state/hooks";
 import PayrollsPage from "./pages/payrolls.page/payrolls.page";
+import SignupInvitePage from "./pages/signup-invites.page/signup-invites.page";
+import NiceModal from "@ebay/nice-modal-react";
 
 function App() {
   const { progress, SETUP_STEPS } = useAppContext();
@@ -33,18 +35,24 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/transfers" element={<TransfersPage />} />
-          <Route path="/users" element={<UsersPage />} />
-          <Route path="/companies" element={<CompaniesPage />} />
-          <Route path="/payroll-employees" element={<PayrollTransfersPage />} />
-          <Route path="/payrolls" element={<PayrollsPage />} />
-          <Route path="*" element={<IndexPage />} />
-        </Routes>
-      </BrowserRouter>
-      <Snackbar {...snackbar} />
+      <NiceModal.Provider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/transfers" element={<TransfersPage />} />
+            <Route path="/users" element={<UsersPage />} />
+            <Route path="/companies" element={<CompaniesPage />} />
+            <Route
+              path="/payroll-employees"
+              element={<PayrollTransfersPage />}
+            />
+            <Route path="/payrolls" element={<PayrollsPage />} />
+            <Route path="/invites" element={<SignupInvitePage />} />
+            <Route path="*" element={<IndexPage />} />
+          </Routes>
+        </BrowserRouter>
+        <Snackbar {...snackbar} />
+      </NiceModal.Provider>
     </>
   );
 }

@@ -68,6 +68,14 @@ export const SideBar = () => {
           </NavLink>
 
           <NavLink
+            to="/invites"
+            className={({ isActive: current }) => Util.classNames({ current })}
+          >
+            <GroupIcon />
+            <Typography component="span">Signup Invites</Typography>
+          </NavLink>
+
+          <NavLink
             to="/companies"
             className={({ isActive: current }) => Util.classNames({ current })}
           >

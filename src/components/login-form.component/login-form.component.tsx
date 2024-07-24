@@ -1,9 +1,9 @@
-import CloseIcon from "@mui/icons-material/Close";
-import { Alert, Collapse, IconButton, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { Navigate } from "react-router-dom";
 import { AppButton } from "../button.component/button.component";
 import { AppTextField } from "../text-field.component/text-field.component";
 import { useLoginFormContext } from "./hooks";
+import { FormError } from "../form-error.component/form-error.component";
 
 export const LoginForm = () => {
   const {
@@ -33,23 +33,7 @@ export const LoginForm = () => {
           Login
         </Typography>
 
-        <Collapse in={!!error}>
-          <Alert
-            action={
-              <IconButton
-                aria-label="close"
-                color="inherit"
-                size="small"
-                onClick={clearError}
-              >
-                <CloseIcon fontSize="inherit" />
-              </IconButton>
-            }
-            severity="error"
-          >
-            {error}
-          </Alert>
-        </Collapse>
+        <FormError error={error} onClick={clearError} />
 
         <AppTextField
           type="email"

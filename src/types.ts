@@ -51,3 +51,10 @@ export type Payroll = Document & {
 export type CompanyWallet = Document & {
   balance: number;
 };
+
+export type AuthToken = Document & {
+  token: string;
+  meta: Record<string, unknown>;
+  isRevoked: boolean;
+  isUsed: boolean;
+};

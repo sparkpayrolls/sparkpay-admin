@@ -17,3 +17,10 @@ export type AuthDetails = Pick<
   LoggedInUser,
   "accessToken" | "refreshToken" | "accessTokenExpires" | "refreshTokenExpires"
 >;
+
+export type CreateSignupInviteToken = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  company: string;
+};

@@ -19,6 +19,7 @@ import snackbar from "./reducers/snackbar/snackbar.reducer";
 import transfers from "./reducers/transfers/transfers.reducer";
 import payrollEmployees from "./reducers/payroll-employees/payroll-employee.reducer";
 import payrolls from "./reducers/payrolls/payroll.reducer";
+import authTokens from "./reducers/auth/auth.reducer";
 
 const reducers = combineReducers({
   companies,
@@ -29,6 +30,7 @@ const reducers = combineReducers({
   transfers,
   payrollEmployees,
   payrolls,
+  authTokens,
 });
 const persistedReducers = persistReducer(
   { key: "root", storage, blacklist: ["snackbar"] },

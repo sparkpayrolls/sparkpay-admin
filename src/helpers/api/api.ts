@@ -5,7 +5,7 @@ import { useAppDispatch } from "../../state/hooks";
 import { logOut } from "../../state/reducers/user/user.reducer";
 import { config } from "../config";
 import { AUTH_DETAILS, AUTH_TOKEN } from "../constants";
-import { AuthModule } from "./modules/auth/auth.module";
+import { AdminAuthModule, AuthModule } from "./modules/auth/auth.module";
 import { AuthDetails } from "./modules/auth/types";
 import { CompanyModule } from "./modules/company/company.module";
 import { DashboardModule } from "./modules/dashboard/dashboard.module";
@@ -79,4 +79,5 @@ export class $api {
   static appUser = new AppUserModule($api.$axios);
   static company = new CompanyModule($api.$axios);
   static dashboard = new DashboardModule($api.$axios);
+  static adminAuth = new AdminAuthModule($api.$axios);
 }
