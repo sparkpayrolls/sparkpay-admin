@@ -3,6 +3,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Snackbar from "@mui/material/Snackbar";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
+import "./tailwind.css";
 import logo from "./assets/svgs/logo.svg";
 import { useAppContext } from "./hooks";
 import CompaniesPage from "./pages/companies.page/companies.page";
