@@ -71,7 +71,7 @@ function _IndexPage() {
               return (
                 <Box key={point.country.id}>
                   <Typography variant="h3" mb={3}>
-                    {point.country.name}
+                    {point.country.name} safe
                   </Typography>
 
                   <Box display="flex" flexDirection="column" gap={2}>
