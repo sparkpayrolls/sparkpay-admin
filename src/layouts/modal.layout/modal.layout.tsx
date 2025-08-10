@@ -6,11 +6,15 @@ import { IModalLayout } from "./types";
 
 export const ModalLayout = (props: IModalLayout) => {
   const modal = useModal();
+  const closeModal = () => {
+    modal.hide();
+    setTimeout(modal.remove.bind(modal), 200);
+  };
 
   return (
     <Drawer
       open={modal.visible}
-      onClose={modal.hide}
+      onClose={closeModal}
       anchor="right"
       className={Util.classNames(`modal-layout`, props.className)}
     >

@@ -15,6 +15,7 @@ import { PayrollModule } from "./modules/payroll/payroll.module";
 import { AppUserModule, UserModule } from "./modules/user/user.module";
 import { PaymentModule } from "./modules/payment/payment.module";
 import { StatutoryPaymentsModule } from "./modules/statutory-payments/statutory-payments.module";
+import { FilesModule } from "./modules/files";
 
 let authToken: string;
 let authDetails: AuthDetails;
@@ -84,4 +85,5 @@ export class $api {
   static dashboard = new DashboardModule($api.$axios);
   static adminAuth = new AdminAuthModule($api.$axios);
   static statutoryPayments = new StatutoryPaymentsModule($api.$axios);
+  static files = new FilesModule($api.$axios);
 }

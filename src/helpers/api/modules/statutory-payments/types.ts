@@ -26,3 +26,8 @@ export type StatutoryPayment = {
   };
   receipts: string[];
 };
+
+export type UpdateStatutoryPaymentPayload = {
+  status: "processing" | "completed";
+  receipts: string[];
+};

@@ -1,7 +1,11 @@
 import { AxiosInstance } from "axios";
 import { ApiResponseWithMeta } from "../../types";
 import { BaseModule } from "../base/base.module";
-import { GetStatutoryPaymentsQuery, StatutoryPayment } from "./types";
+import {
+  GetStatutoryPaymentsQuery,
+  StatutoryPayment,
+  UpdateStatutoryPaymentPayload,
+} from "./types";
 
 export class StatutoryPaymentsModule extends BaseModule {
   constructor($axios: AxiosInstance) {
@@ -17,6 +21,13 @@ export class StatutoryPaymentsModule extends BaseModule {
   retryTransferSuccessProcess(transferId: string) {
     return this.$post<ApiResponseWithMeta<StatutoryPayment>>(
       `/payments/retry-transfer-success/${transferId}`
+    );
+  }
+
+  updateStatutoryPayment(id: string, payload: UpdateStatutoryPaymentPayload) {
+    return this.$put<ApiResponseWithMeta<StatutoryPayment>>(
+      `/payments/${id}`,
+      payload
     );
   }
 }

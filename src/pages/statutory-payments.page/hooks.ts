@@ -13,6 +13,8 @@ import {
 } from "../../state/reducers/statutory-payments/statutory-payments.reducer";
 import { $api } from "../../helpers/api/api";
 import { snackbar } from "../../state/reducers/snackbar/snackbar.reducer";
+import NiceModal from "@ebay/nice-modal-react";
+import { ManageStatutoryPaymentReceiptsModal } from "../../modals/manage-statutory-payment-receipts.modal/manage-statutory-payment-receipts.modal";
 
 export const useStatutoryPaymentsPageContext = () => {
   const {
@@ -37,7 +39,18 @@ export const useStatutoryPaymentsPageContext = () => {
   });
 
   const getStatutoryPaymentOptions = (statutoryPayment: StatutoryPayment) => {
-    const options: TableMoreCellOption[] = [];
+    const options: TableMoreCellOption[] = [
+      {
+        label: "Manage Receipts",
+        onClick() {
+          NiceModal.show(ManageStatutoryPaymentReceiptsModal, {
+            statutoryPayment,
+          }).then(() => {
+            refresh();
+          });
+        },
+      },
+    ];
 
     if (statutoryPayment.transfer?.status === "successful") {
       options.push({
