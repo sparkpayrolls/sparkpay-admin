@@ -23,6 +23,7 @@
     "axios": "^0.27.2",
     "formik": "^2.4.6",
     "js-cookie": "^3.0.1",
+    "lodash.debounce": "^4.0.8",
     "lodash.get": "^4.4.2",
     "lodash.pick": "^4.4.0",
     "moment": "^2.29.3",
@@ -63,6 +64,7 @@
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.2",
+    "@types/lodash.debounce": "^4.0.9",
     "@types/redux-persist": "^4.3.1",
     "tailwindcss": "^3.4.7"
   }

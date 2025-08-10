@@ -7,6 +7,7 @@ import { config } from "../config";
 import { AUTH_DETAILS, AUTH_TOKEN } from "../constants";
 import { AdminAuthModule, AuthModule } from "./modules/auth/auth.module";
 import { AuthDetails } from "./modules/auth/types";
+import { BanksModule } from "./modules/banks/banks.module";
 import { CompanyModule } from "./modules/company/company.module";
 import { DashboardModule } from "./modules/dashboard/dashboard.module";
 import { PayoutModule } from "./modules/payout/payout.module";
@@ -73,6 +74,7 @@ export class $api {
   static $axios = axios.create({ baseURL: config().apiUrl });
   static payroll = new PayrollModule($api.$axios);
   static auth = new AuthModule($api.$axios);
+  static banks = new BanksModule($api.$axios);
   static user = new UserModule($api.$axios);
   static payment = new PaymentModule($api.$axios);
   static payout = new PayoutModule($api.$axios);

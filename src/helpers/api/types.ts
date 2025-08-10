@@ -15,4 +15,6 @@ export type ErrorApiResponse = {
 export type QueryParams = {
   page?: number;
   limit?: number;
+  search?: string;
+  all?: boolean;
 };

@@ -11,6 +11,12 @@ import { usePageContextData } from "../../helpers/hooks/use-page-context-data.ho
 import { Util } from "../../helpers/util/util";
 import { getTransfers } from "../../state/reducers/transfers/transfers.reducer";
 import get from "lodash.get";
+import NiceModal from "@ebay/nice-modal-react";
+import { ModifyDetailsAndRetryTransferModal } from "../../modals/modify-details-and-retry-transfer-modal/modal";
+import { useAppDispatch } from "../../state/hooks";
+import { useAppSelector } from "../../state/hooks";
+import { getBanks } from "../../state/reducers/banks/banks.reducer";
+import { useEffect } from "react";
 
 export const useTrannsferPageContext = () => {
   const {
@@ -40,6 +46,12 @@ export const useTrannsferPageContext = () => {
     },
     stateKey: "transfers",
   });
+  const dispatch = useAppDispatch();
+  const banks = useAppSelector((state) => state.banks);
+
+  useEffect(() => {
+    getBanks(dispatch, { all: true });
+  }, [dispatch]);
 
   const retryFailedTransfer = async (employeeId?: string) => {
     setLoading(true);
@@ -47,6 +59,7 @@ export const useTrannsferPageContext = () => {
     else await $api.payment.retryFailedTransfers();
     setLoading(false);
   };
+
   const getTransferOptions = (transfer: Transfer) => {
     const options: TableMoreCellOption[] = [];
     if (transfer.status === "failed") {
@@ -54,6 +67,18 @@ export const useTrannsferPageContext = () => {
         label: "Retry",
         onClick() {
           retryFailedTransfer(transfer.id);
+        },
+      });
+
+      options.push({
+        label: "Modify Details",
+        onClick() {
+          NiceModal.show(ModifyDetailsAndRetryTransferModal, {
+            banks: banks.data[JSON.stringify({ all: true })]?.data || [],
+            transfer,
+          }).then(() => {
+            refresh();
+          });
         },
       });
     }

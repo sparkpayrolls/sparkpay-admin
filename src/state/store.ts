@@ -11,6 +11,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { config } from "../helpers/config";
+import banks from "./reducers/banks/banks.reducer";
 import companies from "./reducers/companies/companies.reducer";
 import dashboard from "./reducers/dashboard/dashboard.reducer";
 import user from "./reducers/user/user.reducer";
@@ -22,6 +23,7 @@ import payrolls from "./reducers/payrolls/payroll.reducer";
 import authTokens from "./reducers/auth/auth.reducer";
 
 const reducers = combineReducers({
+  banks,
   companies,
   dashboard,
   user,

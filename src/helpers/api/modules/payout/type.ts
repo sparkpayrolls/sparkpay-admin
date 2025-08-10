@@ -13,6 +13,7 @@ export type Transfer = {
   accountName?: string;
   accountNumber?: string;
   bank?: {
+    id: string;
     name: string;
   };
   createdAt: string;
@@ -23,4 +24,9 @@ export type Transfer = {
   remark: string;
   providerResponse?: any;
   meta?: any;
+};
+
+export type ValidateAccountDetailsPayload = {
+  accountNumber: string;
+  bank: string;
 };
