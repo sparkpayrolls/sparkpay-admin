@@ -61,7 +61,10 @@ export const useParamStateKey = <
   useEffect(() => {
     setKey((key) => {
       const newKey = JSON.stringify(params);
-      if (state[newKey]) {
+      if (
+        state[newKey] ||
+        (state["data"] && (state["data"] as Record<string, unknown>)[newKey])
+      ) {
         return newKey;
       }
 

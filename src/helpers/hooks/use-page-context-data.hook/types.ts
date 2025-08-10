@@ -7,7 +7,8 @@ export type UsePageContextDataParams<P = Record<string, unknown>> = {
     | "payrollEmployees"
     | "companies"
     | "payrolls"
-    | "authTokens";
+    | "authTokens"
+    | "statutoryPayments";
   initialParams: P;
   getData(
     dispatch: ReturnType<typeof useAppDispatch>,

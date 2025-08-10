@@ -82,6 +82,14 @@ export const SideBar = () => {
             <BusinessIcon />
             <Typography component="span">Companies</Typography>
           </NavLink>
+
+          <NavLink
+            to="/statutory-payments"
+            className={({ isActive: current }) => Util.classNames({ current })}
+          >
+            <PaidIcon />
+            <Typography component="span">Statutory Payments</Typography>
+          </NavLink>
         </section>
       </nav>
 

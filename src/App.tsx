@@ -16,6 +16,7 @@ import { useAppSelector } from "./state/hooks";
 import PayrollsPage from "./pages/payrolls.page/payrolls.page";
 import SignupInvitePage from "./pages/signup-invites.page/signup-invites.page";
 import NiceModal from "@ebay/nice-modal-react";
+import StatutoryPaymentsPage from "./pages/statutory-payments.page/statutory-payments.page";
 
 function App() {
   const { progress, SETUP_STEPS } = useAppContext();
@@ -49,6 +50,10 @@ function App() {
             />
             <Route path="/payrolls" element={<PayrollsPage />} />
             <Route path="/invites" element={<SignupInvitePage />} />
+            <Route
+              path="/statutory-payments"
+              element={<StatutoryPaymentsPage />}
+            />
             <Route path="*" element={<IndexPage />} />
           </Routes>
         </BrowserRouter>

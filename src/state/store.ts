@@ -21,6 +21,7 @@ import transfers from "./reducers/transfers/transfers.reducer";
 import payrollEmployees from "./reducers/payroll-employees/payroll-employee.reducer";
 import payrolls from "./reducers/payrolls/payroll.reducer";
 import authTokens from "./reducers/auth/auth.reducer";
+import statutoryPayments from "./reducers/statutory-payments/statutory-payments.reducer";
 
 const reducers = combineReducers({
   banks,
@@ -33,6 +34,7 @@ const reducers = combineReducers({
   payrollEmployees,
   payrolls,
   authTokens,
+  statutoryPayments,
 });
 const persistedReducers = persistReducer(
   { key: "root", storage, blacklist: ["snackbar"] },
