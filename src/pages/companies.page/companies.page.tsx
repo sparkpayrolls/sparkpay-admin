@@ -7,6 +7,8 @@ import { Util } from "../../helpers/util/util";
 import { WithAuth } from "../../hoc/with-auth.hoc/with-auth.hoc";
 import { DashboardLayout } from "../../layouts/dashboard.layout/dashboard.layout";
 import { useCompaniesPageContext } from "./hooks";
+import NiceModal from "@ebay/nice-modal-react";
+import { FundCompanyWalletModal } from "../../modals/fund-company-wallet.modal/fund-company-wallet.modal";
 
 function _CompaniesPage() {
   const {
@@ -91,6 +93,16 @@ function _CompaniesPage() {
           label: "Delete Company",
           onClick() {
             deleteCompany(item.id);
+          },
+        },
+        {
+          label: "Fund Wallet",
+          onClick() {
+            NiceModal.show(FundCompanyWalletModal, {
+              companyId: item.id,
+              companyName: item.name,
+              companyWalletBalance: item.wallet?.balance,
+            }).then(refresh);
           },
         },
       ],
