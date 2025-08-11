@@ -41,6 +41,7 @@ export const ManageStatutoryPaymentReceiptsModal = NiceModal.create(
       handleSaveChanges,
       isCompleted,
       toggleCompleted,
+      isSaving,
     } = useManageStatutoryPaymentReceipts(payload);
 
     return (
@@ -226,8 +227,8 @@ export const ManageStatutoryPaymentReceiptsModal = NiceModal.create(
               <AppButton
                 variant="contained"
                 onClick={handleSaveChanges}
-                disabled={uploadState.isUploading}
-                loading={uploadState.isUploading}
+                disabled={uploadState.isUploading || isSaving}
+                loading={uploadState.isUploading || isSaving}
               >
                 Save Changes
               </AppButton>

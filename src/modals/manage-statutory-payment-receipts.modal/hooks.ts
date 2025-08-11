@@ -41,6 +41,7 @@ export const useManageStatutoryPaymentReceipts = (
     error: null,
   });
   const [isCompleted, setIsCompleted] = useState<boolean>(false);
+  const [isSaving, setIsSaving] = useState<boolean>(false);
 
   // Init state from payload
   useEffect(() => {
@@ -136,6 +137,8 @@ export const useManageStatutoryPaymentReceipts = (
   );
 
   const handleSaveChanges = useCallback(async () => {
+    if (isSaving) return;
+    setIsSaving(true);
     try {
       const filesKeyedByUrl = await receipts
         .filter((receipt) => receipt.file)
@@ -189,8 +192,10 @@ export const useManageStatutoryPaymentReceipts = (
           horizontal: "center",
         },
       });
+    } finally {
+      setIsSaving(false);
     }
-  }, [isCompleted, modal, payload.statutoryPayment.id, receipts]);
+  }, [isCompleted, modal, payload.statutoryPayment.id, receipts, isSaving]);
 
   const formatFileSize = useCallback((bytes: number): string => {
     if (bytes === 0) return "0 Bytes";
@@ -212,5 +217,6 @@ export const useManageStatutoryPaymentReceipts = (
     formatFileSize,
     isCompleted,
     toggleCompleted: () => setIsCompleted((prev) => !prev),
+    isSaving,
   };
 };
