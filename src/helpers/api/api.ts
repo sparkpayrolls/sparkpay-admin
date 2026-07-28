@@ -17,6 +17,7 @@ import { PaymentModule } from "./modules/payment/payment.module";
 import { StatutoryPaymentsModule } from "./modules/statutory-payments/statutory-payments.module";
 import { FilesModule } from "./modules/files";
 import { CompanyWalletModule } from "./modules/company-wallet/company-wallet.module";
+import { DemoBookingModule } from "./modules/demo-booking/demo-booking.module";
 
 let authToken: string;
 let authDetails: AuthDetails;
@@ -88,4 +89,5 @@ export class $api {
   static statutoryPayments = new StatutoryPaymentsModule($api.$axios);
   static files = new FilesModule($api.$axios);
   static companyWallet = new CompanyWalletModule($api.$axios);
+  static demoBooking = new DemoBookingModule($api.$axios);
 }

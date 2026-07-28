@@ -4,6 +4,7 @@ import GroupIcon from "@mui/icons-material/Group";
 import PaidIcon from "@mui/icons-material/Paid";
 import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
+import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import { Box, Typography } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import logo_blue from "../../assets/svgs/logo-blue.svg";
@@ -89,6 +90,14 @@ export const SideBar = () => {
           >
             <PaidIcon />
             <Typography component="span">Statutory Payments</Typography>
+          </NavLink>
+
+          <NavLink
+            to="/demo-bookings"
+            className={({ isActive: current }) => Util.classNames({ current })}
+          >
+            <EventAvailableIcon />
+            <Typography component="span">Demo Bookings</Typography>
           </NavLink>
         </section>
       </nav>
