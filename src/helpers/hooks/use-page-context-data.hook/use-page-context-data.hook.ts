@@ -37,6 +37,20 @@ export const usePageContextData = <
     setParams({ ..._params, page });
   };
 
+  // Stable identity: SearchField debounces on it, so it must not be
+  // rebuilt every render or the debounce would never accumulate.
+  const onSearchChange = useCallback((search: string) => {
+    setParams((current) => {
+      const next = { ...current, search: search || undefined };
+      // A narrower result set can make the current page overshoot.
+      if ((current as { search?: string }).search === next.search) {
+        return current;
+      }
+
+      return { ...next, page: 1 };
+    });
+  }, []);
+
   const onRowsPerPageChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -50,10 +64,12 @@ export const usePageContextData = <
     key,
     page: (_params.page || 0) as number,
     rowsPerPage: (_params.limit || 10) as number,
+    search: (_params.search || "") as string,
     params: _params,
     setParams,
     onPageChange,
     onRowsPerPageChange,
+    onSearchChange,
     refresh,
     setLoading,
   };

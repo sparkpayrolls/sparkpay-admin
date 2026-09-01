@@ -27,6 +27,8 @@ export const useStatutoryPaymentsPageContext = () => {
     refresh,
     onPageChange,
     onRowsPerPageChange,
+    search,
+    onSearchChange,
   } = usePageContextData<StatutoryPaymentsState, GetStatutoryPaymentsQuery>({
     getData: getStatutoryPayments,
     initialParams: {
@@ -132,6 +134,8 @@ export const useStatutoryPaymentsPageContext = () => {
     rowsPerPage: params.limit || 10,
     onRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
     shouldRefresh,
     title,
   };

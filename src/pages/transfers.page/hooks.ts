@@ -30,6 +30,8 @@ export const useTrannsferPageContext = () => {
     refresh,
     onPageChange,
     onRowsPerPageChange,
+    search,
+    onSearchChange,
   } = usePageContextData<
     Record<string, ApiResponseWithMeta<Transfer[]>>,
     GetTransfersQuery
@@ -173,6 +175,8 @@ export const useTrannsferPageContext = () => {
     rowsPerPage: params.limit || 10,
     onRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
     retryFailedTransfer,
     shouldRefresh,
     title,

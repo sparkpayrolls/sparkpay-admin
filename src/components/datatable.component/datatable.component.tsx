@@ -12,6 +12,7 @@ import {
   TableRow,
 } from "@mui/material";
 import { IF } from "../if.component/if.component";
+import { SearchField } from "../search-field.component";
 import { AppTable } from "../table.component/table.component";
 import { TableMoreCellOption } from "../table.component/types";
 import { useDataTableContext } from "./hooks";
@@ -28,6 +29,9 @@ export const DataTable = (props: DataTableProps) => {
     shouldRefresh,
     title,
     toolBarContent,
+    search,
+    searchPlaceholder,
+    onSearchChange,
     onRowsPerPageChange,
     refresh,
   } = props;
@@ -49,6 +53,14 @@ export const DataTable = (props: DataTableProps) => {
             </IF>
 
             <AppTable.Tools>
+              <IF condition={!!onSearchChange}>
+                <SearchField
+                  value={search}
+                  placeholder={searchPlaceholder}
+                  onChange={onSearchChange as (value: string) => void}
+                />
+              </IF>
+
               <IF condition={!!refresh}>
                 <AppTable.Button
                   onClick={refresh}

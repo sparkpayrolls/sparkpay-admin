@@ -27,6 +27,8 @@ export const usePayrollsPageContext = () => {
     refresh,
     onPageChange: handlePageChange,
     onRowsPerPageChange: handleRowsPerPageChange,
+    search,
+    onSearchChange,
   } = usePageContextData<
     Record<string, ApiResponseWithMeta<Payroll[]>>,
     typeof initialParams
@@ -156,5 +158,7 @@ export const usePayrollsPageContext = () => {
     handlePageChange,
     handleRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
   };
 };

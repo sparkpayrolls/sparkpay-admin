@@ -20,6 +20,8 @@ export const useCompaniesPageContext = () => {
     onRowsPerPageChange,
     setLoading,
     refresh,
+    search,
+    onSearchChange,
   } = usePageContextData<
     Record<string, ApiResponseWithMeta<GetCompaniesResponse[]>>,
     GetCompaniesQueryParams
@@ -68,5 +70,7 @@ export const useCompaniesPageContext = () => {
     onPageChange,
     onRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
   };
 };
