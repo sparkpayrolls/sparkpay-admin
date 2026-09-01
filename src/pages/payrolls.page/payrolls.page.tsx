@@ -17,6 +17,8 @@ function _PayrollsPage() {
     handlePageChange,
     handleRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
   } = usePayrollsPageContext();
 
   return (
@@ -30,6 +32,9 @@ function _PayrollsPage() {
         data={data}
         headRow={headRow}
         refresh={refresh}
+        search={search}
+        searchPlaceholder="Search by company name"
+        onSearchChange={onSearchChange}
         shouldRefresh={shouldRefresh}
         title={title}
         filterContent={

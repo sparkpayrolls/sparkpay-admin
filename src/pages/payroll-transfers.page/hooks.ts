@@ -23,6 +23,8 @@ export const usePayrollTransfersPageContext = () => {
     refresh,
     onPageChange: handlePageChange,
     onRowsPerPageChange: handleRowsPerPageChange,
+    search,
+    onSearchChange,
   } = usePageContextData<
     Record<string, ApiResponseWithMeta<PayrollEmployee[]>>,
     GetPayrollEmployeeQuery
@@ -116,6 +118,8 @@ export const usePayrollTransfersPageContext = () => {
     handlePageChange,
     handleRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
     retryFailedTransfer,
     transformDateValue,
   };

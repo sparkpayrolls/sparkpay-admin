@@ -17,6 +17,8 @@ function _SignupInvitePage() {
     handlePageChange,
     handleRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
     createInviteToken,
   } = useSignupInvitePageContext();
 
@@ -31,6 +33,9 @@ function _SignupInvitePage() {
         data={data}
         headRow={headRow}
         refresh={refresh}
+        search={search}
+        searchPlaceholder="Search by email"
+        onSearchChange={onSearchChange}
         shouldRefresh={shouldRefresh}
         title={title}
         toolBarContent={

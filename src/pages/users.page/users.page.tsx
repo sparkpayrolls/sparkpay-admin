@@ -17,6 +17,8 @@ function _UsersPage() {
     rowsPerPage,
     onRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
     shouldRefresh,
     title,
     loading,
@@ -80,6 +82,9 @@ function _UsersPage() {
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={onRowsPerPageChange}
         refresh={refresh}
+        search={search}
+        searchPlaceholder="Search by name or email"
+        onSearchChange={onSearchChange}
         shouldRefresh={shouldRefresh}
         title={title}
       />

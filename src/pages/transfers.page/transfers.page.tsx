@@ -17,6 +17,8 @@ function _TransfersPage() {
     page,
     rowsPerPage,
     refresh,
+    search,
+    onSearchChange,
     retryFailedTransfer,
     shouldRefresh,
     title,
@@ -33,6 +35,9 @@ function _TransfersPage() {
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={onRowsPerPageChange}
         refresh={refresh}
+        search={search}
+        searchPlaceholder="Search by account name or reference"
+        onSearchChange={onSearchChange}
         shouldRefresh={shouldRefresh}
         title={title}
         filterContent={

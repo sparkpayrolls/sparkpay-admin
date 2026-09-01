@@ -18,6 +18,8 @@ export const useUserPageContext = () => {
     onPageChange,
     onRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
   } = usePageContextData<
     Record<string, ApiResponseWithMeta<GetUsersResponse[]>>,
     GetUsersQueryParams
@@ -51,5 +53,7 @@ export const useUserPageContext = () => {
     onPageChange,
     onRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
   };
 };

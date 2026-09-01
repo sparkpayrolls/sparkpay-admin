@@ -18,6 +18,8 @@ function _PayrollTransfersPage() {
     handlePageChange,
     handleRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
     retryFailedTransfer,
     transformDateValue,
   } = usePayrollTransfersPageContext();
@@ -33,6 +35,9 @@ function _PayrollTransfersPage() {
         data={data}
         headRow={headRow}
         refresh={refresh}
+        search={search}
+        searchPlaceholder="Search by employee name"
+        onSearchChange={onSearchChange}
         shouldRefresh={shouldRefresh}
         title={title}
         filterContent={

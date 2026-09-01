@@ -32,4 +32,7 @@ export type DataTableProps = {
     | undefined;
   shouldRefresh?: boolean;
   toolBarContent?: React.ReactNode;
+  search?: string;
+  searchPlaceholder?: string;
+  onSearchChange?(value: string): void;
 };

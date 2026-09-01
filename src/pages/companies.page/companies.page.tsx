@@ -20,6 +20,8 @@ function _CompaniesPage() {
     rowsPerPage,
     onRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
     shouldRefresh,
     title,
     loading,
@@ -120,6 +122,9 @@ function _CompaniesPage() {
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={onRowsPerPageChange}
         refresh={refresh}
+        search={search}
+        searchPlaceholder="Search by name, email or phone"
+        onSearchChange={onSearchChange}
         shouldRefresh={shouldRefresh}
         title={title}
       />

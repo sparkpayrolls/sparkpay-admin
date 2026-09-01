@@ -24,6 +24,8 @@ export const useSignupInvitePageContext = () => {
     refresh,
     onPageChange: handlePageChange,
     onRowsPerPageChange: handleRowsPerPageChange,
+    search,
+    onSearchChange,
   } = usePageContextData<
     Record<string, ApiResponseWithMeta<AuthToken[]>>,
     typeof initialParams
@@ -85,6 +87,8 @@ export const useSignupInvitePageContext = () => {
     handlePageChange,
     handleRowsPerPageChange,
     refresh,
+    search,
+    onSearchChange,
     createInviteToken() {
       return NiceModal.show(AddSignupInviteModal).then(refresh);
     },

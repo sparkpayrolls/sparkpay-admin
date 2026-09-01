@@ -16,6 +16,8 @@ function _StatutoryPaymentsPage() {
     page,
     rowsPerPage,
     refresh,
+    search,
+    onSearchChange,
     shouldRefresh,
     title,
   } = useStatutoryPaymentsPageContext();
@@ -31,6 +33,9 @@ function _StatutoryPaymentsPage() {
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={onRowsPerPageChange}
         refresh={refresh}
+        search={search}
+        searchPlaceholder="Search by company name"
+        onSearchChange={onSearchChange}
         shouldRefresh={shouldRefresh}
         title={title}
         filterContent={
