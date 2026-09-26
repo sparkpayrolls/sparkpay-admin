@@ -75,7 +75,23 @@ export class $api {
     );
   }
 
-  static $axios = axios.create({ baseURL: config().apiUrl });
+  static $axios = axios.create({
+    baseURL: config().apiUrl,
+    paramsSerializer: (params) => {
+      const searchParams = new URLSearchParams();
+      Object.entries(params || {}).forEach(([key, value]) => {
+        if (value == null) return;
+        if (Array.isArray(value)) {
+          value.forEach((item) => {
+            if (item != null) searchParams.append(key, String(item));
+          });
+          return;
+        }
+        searchParams.append(key, String(value));
+      });
+      return searchParams.toString();
+    },
+  });
   static payroll = new PayrollModule($api.$axios);
   static auth = new AuthModule($api.$axios);
   static banks = new BanksModule($api.$axios);
