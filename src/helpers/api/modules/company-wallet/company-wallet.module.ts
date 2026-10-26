@@ -10,4 +10,8 @@ export class CompanyWalletModule extends BaseModule {
   fundCompanyWallet(payload: FundCompanyWalletPayload) {
     return this.$post("/fund", payload);
   }
+
+  debitCompanyWallet(payload: FundCompanyWalletPayload) {
+    return this.$post("/debit", payload);
+  }
 }

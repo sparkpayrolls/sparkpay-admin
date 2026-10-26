@@ -9,6 +9,7 @@ import { DashboardLayout } from "../../layouts/dashboard.layout/dashboard.layout
 import { useCompaniesPageContext } from "./hooks";
 import NiceModal from "@ebay/nice-modal-react";
 import { FundCompanyWalletModal } from "../../modals/fund-company-wallet.modal/fund-company-wallet.modal";
+import { DebitCompanyWalletModal } from "../../modals/debit-company-wallet.modal/debit-company-wallet.modal";
 
 function _CompaniesPage() {
   const {
@@ -101,6 +102,16 @@ function _CompaniesPage() {
           label: "Fund Wallet",
           onClick() {
             NiceModal.show(FundCompanyWalletModal, {
+              companyId: item.id,
+              companyName: item.name,
+              companyWalletBalance: item.wallet?.balance,
+            }).then(refresh);
+          },
+        },
+        {
+          label: "Debit Wallet",
+          onClick() {
+            NiceModal.show(DebitCompanyWalletModal, {
               companyId: item.id,
               companyName: item.name,
               companyWalletBalance: item.wallet?.balance,
