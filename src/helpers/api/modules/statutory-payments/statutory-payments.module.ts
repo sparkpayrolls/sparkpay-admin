@@ -24,6 +24,12 @@ export class StatutoryPaymentsModule extends BaseModule {
     );
   }
 
+  initiateTransfer(id: string) {
+    return this.$post<ApiResponseWithMeta<StatutoryPayment>>(
+      `/payments/${id}/initiate-transfer`
+    );
+  }
+
   updateStatutoryPayment(id: string, payload: UpdateStatutoryPaymentPayload) {
     return this.$put<ApiResponseWithMeta<StatutoryPayment>>(
       `/payments/${id}`,

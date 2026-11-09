@@ -54,6 +54,55 @@ export const useStatutoryPaymentsPageContext = () => {
       },
     ];
 
+    if (statutoryPayment.transfer?.status === "failed") {
+      options.push({
+        label: "Retry transfer",
+        onClick() {
+          $api.payment
+            .retryFailedTransfers([statutoryPayment.transfer.id])
+            .then(() => {
+              snackbar({
+                open: true,
+                message: "Transfer retry initiated",
+              });
+              refresh();
+            })
+            .catch((error) => {
+              snackbar({
+                open: true,
+                message: error.message,
+              });
+            });
+        },
+      });
+    }
+
+    if (
+      statutoryPayment.status === "pending" &&
+      !statutoryPayment.transfer
+    ) {
+      options.push({
+        label: "Initiate transfer",
+        onClick() {
+          $api.statutoryPayments
+            .initiateTransfer(statutoryPayment.id)
+            .then(() => {
+              snackbar({
+                open: true,
+                message: "Transfer initiated",
+              });
+              refresh();
+            })
+            .catch((error) => {
+              snackbar({
+                open: true,
+                message: error.message,
+              });
+            });
+        },
+      });
+    }
+
     if (statutoryPayment.transfer?.status === "successful") {
       options.push({
         label: "Resend payment schedules",
